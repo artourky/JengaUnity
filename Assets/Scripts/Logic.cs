@@ -2,11 +2,13 @@
 
 public class Logic : MonoBehaviour {
 
+	public Transform cameraHolder;
+
 	TowerCreation towerObj;
 
 	void Start()
 	{
-		print("[Logic] Press 'r' to reload Scene, 'c' to recreate Tower!");
+		print("[Logic] Press 'r' to reload Scene, 'c' to recreate Tower, 'x' to explode!");
 
 		if (towerObj == null)
 		{
@@ -25,6 +27,17 @@ public class Logic : MonoBehaviour {
 		{
 			RecreateTower();
 		}
+
+		if (Input.GetKeyDown(KeyCode.X))
+		{
+			Explode();
+		}
+	}
+
+	public void Explode()
+	{
+		print("[Logic] Appling Explosing force!");
+		towerObj.MakeExplosion();
 	}
 
 	public void RestartLevel()
@@ -37,5 +50,10 @@ public class Logic : MonoBehaviour {
 	{
 		print("[Logic] recreating Tower");
 		towerObj.RecreateTower();
+	}
+
+	public void RaiseCameraHolder()
+	{
+		cameraHolder.localPosition = cameraHolder.localPosition + new Vector3(0f, 1f);
 	}
 }
